@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.example.config.Configuration;
+import org.example.filter.AuthorizationRequestFilter;
 import org.glassfish.grizzly.ssl.SSLContextConfigurator;
 import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
@@ -40,7 +41,9 @@ public class Main {
                     // Required for MULTIPART_FORM_DATA
                     .register(MultiPartFeature.class)
                     // Register own Servlet
-                    .register(Upload.class);
+                    .register(Upload.class)
+                    .register(AuthorizationRequestFilter.class);
+
 
 
             // Start server
