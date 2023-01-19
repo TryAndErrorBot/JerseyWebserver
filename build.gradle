@@ -21,6 +21,8 @@ dependencies {
     implementation group: 'org.glassfish.jersey.containers', name: 'jersey-container-grizzly2-http', version: '2.38'
     implementation group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.38'
     implementation group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '4.0.1'
+
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.33'
 }
 
 test {
