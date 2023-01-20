@@ -19,6 +19,13 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
             return;
         }
 
+        //Send new Request to another auth interface to validate the auth header
+        //https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest3x/client.html
+        /**
+        JsonObject responseEntity = ClientBuilder.newClient()
+                .target("https://rest-interface").path("resources")
+                .request().header("Authorization", authHeader).get(JsonObject.class);
+        **/
         String[] tokens = (new String(Base64.getDecoder().decode(authHeader.split(" ")[1]), StandardCharsets.UTF_8)).split(":");
         final String username = tokens[0];
         final String password = tokens[1];
