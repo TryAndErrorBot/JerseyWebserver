@@ -1,6 +1,7 @@
 package org.example.filter;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -18,9 +19,11 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
             return;
         }
 
-        String[] tokens = (new String(Base64.getDecoder().decode(authHeader.split(" ")[1]), "UTF-8")).split(":");
+        String[] tokens = (new String(Base64.getDecoder().decode(authHeader.split(" ")[1]), StandardCharsets.UTF_8)).split(":");
         final String username = tokens[0];
         final String password = tokens[1];
+        final String response = "This is the response";
+        requestContext.setProperty("response", response);
 
         if (!username.equals("basicauth") || !password.equals("password")) {
             requestContext.abortWith(Response.status(401).build());
